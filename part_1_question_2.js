@@ -1,8 +1,8 @@
 // Test Data 1
-let markMass1 = 78; // Mark's mass in kg
-let markHeight1 = 1.69; // Mark's height in meters
-let johnMass1 = 92; // John's mass in kg
-let johnHeight1 = 1.95; // John's height in meters
+let markMass1 = 78; 
+let markHeight1 = 1.69; 
+let johnMass1 = 92; 
+let johnHeight1 = 1.95; 
 
 // Test Data 2
 let markMass2 = 95;
