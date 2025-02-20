@@ -29,7 +29,7 @@ export default function BaiTap_3() {
 
   return (
     <div>
-      <h1>BaiTap3</h1>
+      <h2>BaiTap3</h2>
       <div style={{}}>
         <input onChange={(e) => { setA(e.target.value) }} />
         <br />
@@ -43,7 +43,7 @@ export default function BaiTap_3() {
       <br />
       <button onClick={handleClick}>Calculator</button>
       <br />
-      <h2>{result}</h2>
+      <span>{result}</span>
       <hr />
     </div>
   )

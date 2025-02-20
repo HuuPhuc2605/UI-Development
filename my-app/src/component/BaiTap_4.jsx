@@ -16,7 +16,7 @@ export default function BaiTap_4() {
 
   return (
     <div>
-      <h1>Todo List</h1>
+      <h2>Todo List</h2>
       <div>
         <input 
           value={task} 
