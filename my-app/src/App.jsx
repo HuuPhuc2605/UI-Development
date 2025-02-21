@@ -7,6 +7,8 @@ import BaiTap_2 from './component/BaiTap_2'
 import BaiTap_3 from './component/BaiTap_3'
 import BaiTap_4 from './component/BaiTap_4'
 import Discover_Chefity from './component/Discover_Chefity'
+import Login from './component/Login'
+
 function App() {
   return(
     <>
@@ -18,7 +20,9 @@ function App() {
     <hr/>
     <BaiTap_4></BaiTap_4> */}
 
-  <Discover_Chefity></Discover_Chefity>
+  {/* <Discover_Chefity></Discover_Chefity> */}
+
+  <Login></Login>
     </>
   )
 }

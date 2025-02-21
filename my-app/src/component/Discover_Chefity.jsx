@@ -20,14 +20,18 @@ export default function DiscoverChefity() {
             <p style={styles.description}>
                 Easy and delicious cooking instructions right here. Start exploring now!
             </p>
+
             <div style={styles.imageWrapper}>
                 <img src={Image} alt="Discover Chefity" style={styles.image} />
             </div>
-            <div style={styles.pagination}>
+
+            {/* Dấu chấm  chỉ tiến trình*/ }
+            <div style={styles.pagination}> 
                 <span style={styles.dot}></span>
                 <span style={{ ...styles.dot, backgroundColor: "#FF4081" }}></span>
                 <span style={styles.dot}></span>
             </div>
+
             <div style={styles.buttonContainer}>
                 <button style={styles.nextButton} onClick={handleNext}>Next</button>
                 <button style={styles.skipButton} onClick={handleSkip}>Skip</button>
@@ -36,8 +40,9 @@ export default function DiscoverChefity() {
     );
 }
 
-// 🔹 Styles
+// Styles
 const styles = {
+
     container: {
         width: "500px",
         padding: "20px",
@@ -47,11 +52,13 @@ const styles = {
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         margin: "auto",
     },
+
     title: {
         fontSize: "24px",
         fontWeight: "bold",
         color: "#FF4081",
     },
+
     description: {
         fontSize: "14px",
         color: "#555",
@@ -82,6 +89,7 @@ const styles = {
         gap: "10px",
         marginTop: "10px",
     },
+
     nextButton: {
         backgroundColor: "#FF4081",
         color: "white",
@@ -92,11 +100,14 @@ const styles = {
         fontSize: "16px",
         width: "80%", // Tăng chiều rộng để nhìn cân đối hơn
     },
+    
     skipButton: {
         background: "none",
         border: "none",
         color: "#555",
         cursor: "pointer",
+        borderRadius: "20px",
         fontSize: "14px",
+        width: "80%", 
     },
 };
