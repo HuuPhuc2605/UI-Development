@@ -8,21 +8,23 @@ import BaiTap_3 from './component/BaiTap_3'
 import BaiTap_4 from './component/BaiTap_4'
 import Discover_Chefity from './component/Discover_Chefity'
 import Login from './component/Login'
+import InvestmentCalculator from './component/InvestmentCalculator'
 
 function App() {
   return(
     <>
-    {/* <BaiTap_1></BaiTap_1>
+    <BaiTap_1></BaiTap_1>
     <hr/>
     <BaiTap_2></BaiTap_2>
     <hr/>
     <BaiTap_3></BaiTap_3>
     <hr/>
-    <BaiTap_4></BaiTap_4> */}
+    <BaiTap_4></BaiTap_4> 
 
-  {/* <Discover_Chefity></Discover_Chefity> */}
+<Discover_Chefity></Discover_Chefity>
 
   <Login></Login>
+  <InvestmentCalculator></InvestmentCalculator>
     </>
   )
 }
