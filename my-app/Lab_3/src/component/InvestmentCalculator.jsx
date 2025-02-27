@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./InvestmentCalculator.css"; 
 
 const InvestmentCalculator = () => {
   const [investMoney, setInvestMoney] = useState("");
@@ -11,80 +12,78 @@ const InvestmentCalculator = () => {
       alert("Vui lòng nhập đầy đủ thông tin!");
       return;
     }
-
+  
     let year = new Date().getFullYear();
     let money = parseFloat(investMoney);
     const interestRate = parseFloat(rate) / 100;
     const target = parseFloat(goal);
-
+  
     let data = [];
-
+  
     while (money < target) {
-      let endYearMoney = money + money * interestRate;
+      let endYearMoney = Math.floor(money * (1 + interestRate)); 
       data.push({
         year,
-        money: money.toFixed(0),
-        rate,
-        endYear: endYearMoney.toFixed(0),
+        money: Math.floor(money), 
+        rate: Math.floor(rate), 
+        endYear: endYearMoney,
       });
       money = endYearMoney;
       year++;
     }
-
+  
     setResults(data);
   };
+  
 
   return (
-    <div className="flex flex-col items-center p-5 bg-black text-white min-h-screen">
-      <h2 className="text-2xl font-bold mb-4">Investment Calculator</h2>
+    <div className="investment-container">
+      <h2 className="investment-title">Investment Calculator</h2>
 
-      <div className="flex flex-col gap-3 w-64">
+      <div className="investment-form">
         <input
           type="number"
           placeholder="Input Your Invest Money"
           value={investMoney}
           onChange={(e) => setInvestMoney(e.target.value)}
-          className="p-2 border border-gray-500 rounded bg-black text-white text-center"
+          className="investment-input"
         />
         <input
           type="number"
           placeholder="Input Rate (%)"
           value={rate}
           onChange={(e) => setRate(e.target.value)}
-          className="p-2 border border-gray-500 rounded bg-black text-white text-center"
+          className="investment-input"
         />
         <input
           type="number"
           placeholder="Input Your Goal"
           value={goal}
           onChange={(e) => setGoal(e.target.value)}
-          className="p-2 border border-gray-500 rounded bg-black text-white text-center"
+          className="investment-input"
         />
-        <button
-          onClick={handleCalculate}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded mt-2"
-        >
-          Click
+        <button onClick={handleCalculate} className="investment-button">
+          Calculate
         </button>
       </div>
 
       {results.length > 0 && (
-        <table className="mt-5 border-collapse border w-80 text-center text-yellow-400">
+        <table className="investment-table">
           <thead>
-            <tr className="border border-yellow-400">
-              <th className="border border-yellow-400 p-2">Year</th>
-              <th className="border border-yellow-400 p-2">Money</th>
-              <th className="border border-yellow-400 p-2">Rate</th>
-              <th className="border border-yellow-400 p-2">End Year</th>
+            <tr>
+              <th>Year</th>
+              <th>Money</th>
+              <th>Rate</th>
+              <th>End Year</th>
             </tr>
           </thead>
           <tbody>
             {results.map((row, index) => (
-              <tr key={index} className="border border-yellow-400">
-                <td className="border border-yellow-400 p-2">{row.year}</td>
-                <td className="border border-yellow-400 p-2">{row.money}</td>
-                <td className="border border-yellow-400 p-2">{row.rate}%</td>
-                <td className="border border-yellow-400 p-2">{row.endYear}</td>
+              <tr key={index}>
+                <td>{row.year}</td>
+                <td>{row.money}</td>
+                <td>{row.rate}%</td>
+                <td>{row.endYear}</td>
               </tr>
             ))}
           </tbody>

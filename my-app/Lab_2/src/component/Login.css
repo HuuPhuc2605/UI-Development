@@ -1,0 +1,133 @@
+.container {
+    width: 900px;
+    height: 500px;
+    padding: 20px;
+    display: flex;
+    align-items: stretch;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    overflow: hidden;
+}
+
+.contentWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #454545;
+    text-align: left;
+}
+
+.description {
+    font-size: 14px;
+    color: #454545;
+    text-align: left;
+}
+
+.imageWrapper {
+    flex: 1;
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    width: 95%;
+    background-color: #e9e9e9;
+    font-size: 12px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.continueButton {
+    margin-top: 15px;
+    background-color: #FF4081;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.overlay {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+}
+
+.textOverlay {
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.whiteButton {
+    margin-top: 5px;
+    background-color: #e9e9e9;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.separatorText {
+    font-size: 14px;
+    color: #808080;
+    margin-top: 0px;
+}
+
+.termsText {
+    font-size: 12px;
+    color: #808080;
+    margin-top: 0px;
+}
+
+.googleButton {
+    color: red;
+}
+
+.facebookButton {
+    color: blue;
+}
+
+.appleButton {
+    color: black;
+}
+
+.icon {
+    font-weight: bold;
+    font-size: 16px;
+}
