@@ -1,6 +1,6 @@
 /* Tổng thể */
 .container {
-    max-width: 1200px;
+    width:9000px;s
     margin: 0 auto;
     padding: 20px;
     background-color: #121212;
@@ -10,50 +10,80 @@
 /* Lưới hiển thị món ăn */
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Hiển thị nhiều cột */
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr); /* Chia 4 cột */
+    gap: 20px; /* Khoảng cách giữa các công thức */
     justify-content: center;
-    align-items: stretch;
-    margin-top: 20px;
 }
 
-/* Card món ăn */
 .recipe-card {
-    background: #1e1e1e;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    margin-top: 100px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
     text-align: center;
     padding: 15px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
 }
+
 
 .recipe-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
 }
 
-/* Hình ảnh món ăn */
 .recipe-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
+    width: 100%; /* Đảm bảo ảnh full chiều rộng */
+    height: 200px; /* Giữ chiều cao cố định */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border-radius: 8px;
 }
+
+
 
 /* Thông tin món ăn */
 .recipe-info {
     margin-top: 10px;
-    text-align: center;
+    text-align: left;
+    color: rgb(0, 0, 0);
 }
 
 .recipe-info h3 {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .recipe-info p {
     font-size: 14px;
-    color: #bbb;
+    color: hotpink;
+}
+.bookmark-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #FF1493;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 260px;
+    right: 10px;
+    background: white;
+}
+
+.bookmark-icon:hover {
+    background: #FF1493;
+}
+
+.bookmark-icon svg {
+    stroke: #FF1493;
+    transition: all 0.3s ease;
+}
+
+.bookmark-icon:hover svg {
+    stroke: white;
 }

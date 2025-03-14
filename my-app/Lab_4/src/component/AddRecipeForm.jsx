@@ -1,90 +1,39 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import "./AddRecipeForm.css";
 
-const API_URL = "https://67ca6b86102d684575c5483b.mockapi.io/Lab4";
-
-export const AddRecipeForm = () => {
-    const [content, setContent] = useState("");
-    const [minutes, setMinutes] = useState("");
-    const [img, setImg] = useState("");
-    const [recipes, setRecipes] = useState([]);
-
-    useEffect(() => {
-        fetchRecipes();
-    }, []);
-
-    const fetchRecipes = async () => {
-        try {
-            const response = await axios.get(API_URL);
-            setRecipes(response.data);
-        } catch (error) {
-            console.error("Lỗi khi tải dữ liệu:", error);
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const newRecipe = { content, minutes: Number(minutes), img };
-
-        try {
-            await axios.post(API_URL, newRecipe);
-            alert("Thêm món ăn thành công!");
-            fetchRecipes(); // Cập nhật danh sách sau khi thêm
-            setContent("");
-            setMinutes("");
-            setImg("");
-        } catch (error) {
-            alert("Lỗi khi thêm món ăn!");
-        }
-    };
+export const AddRecipeForm = ({ recipes }) => {  // ✅ Nhận recipes từ props, KHÔNG cần khai báo lại useState([])
 
     return (
-        <div className="container">
-            {/* Form Thêm Món Ăn */}
-            <form onSubmit={handleSubmit} className="form-container">
-                <h2>Thêm Công Thức Món Ăn</h2>
-                <input
-                    type="text"
-                    placeholder="Tên món ăn"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    required
-                    className="input-field"
-                />
-                <input
-                    type="number"
-                    placeholder="Thời gian (phút)"
-                    value={minutes}
-                    onChange={(e) => setMinutes(e.target.value)}
-                    required
-                    className="input-field"
-                />
-                <input
-                    type="text"
-                    placeholder="URL hình ảnh"
-                    value={img}
-                    onChange={(e) => setImg(e.target.value)}
-                    required
-                    className="input-field"
-                />
-                <button type="submit" className="submit-btn">Thêm Món Ăn</button>
-            </form>
-
-            {/* Danh sách món ăn */}
-            <div className="recipe-grid">
-                {recipes.map((recipe) => (
-                    <div key={recipe.id} className="recipe-card">
-                        <img src={recipe.img} alt={recipe.content} className="recipe-image" />
-                        <div className="recipe-info">
-                            <h3>{recipe.content}</h3>
-                            <p>{recipe.minutes} phút</p>
-                        </div>
-                    </div>
-                ))}
+        
+        <div className="recipe-grid">
+    {recipes.map((recipe) => (
+        <div key={recipe.id} className="recipe-card">
+            {console.log("URL ảnh:", recipe.image)} {/* 🛑 Kiểm tra URL ảnh */}
+            <img src={recipe.image} alt={recipe.content} className="recipe-image" />
+            <div className="recipe-info">
+                <h3>{recipe.content}</h3>
+                <p>{recipe.minutes} minutes</p>
             </div>
+            <div className="bookmark-icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
         </div>
+        
+    ))}
+</div>
+
     );
 };
 
