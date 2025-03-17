@@ -1,0 +1,201 @@
+.container{
+    width: 100%;
+    background-color: rgb(255, 255, 255); 
+    padding: 30px;
+    max-width: 1600px;
+ }
+ /* Header */
+ .header{
+     display: flex;
+     align-items: center;
+     justify-content: space-between; /* Phân bố khoảng cách đều giữa các phần tử */
+     background-color:rgb(255, 255, 255);
+     color: rgb(24, 22, 22);
+     max-width: 100%;
+     border-bottom: 2px solid #e0e0e0; 
+     height: 80px;
+ }
+ .button{
+     display: flex;
+     gap: 20px;
+ }
+ .button btn{
+     background-color: none; 
+     border-color: none; 
+     font-size: 16px;
+ }
+ .header input{
+     width: 300px;
+     height: 40px;
+     border-radius: 10px;
+     background-color: #e0e0e0;
+     border: none;
+    
+ }
+ .box{
+     background-color: #fbe8eb;
+     color: rgb(250, 91, 176);
+     border-radius: 5px;
+     height: 40px;
+     font-size: 16px;
+     display: flex;
+ }
+ /* Menu */
+ .main-avatar{
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     flex-wrap: wrap;
+ }
+ .main-text{
+     flex: 1;
+     font-size: 24px;
+     color: #000000;
+ }
+ .main-button{
+     display: flex;
+     gap: 20px;
+     margin-bottom: 100px;
+     padding-left: 250px;
+ }
+ .subscribe-btn {
+     color: #ff4dac;
+     font-size: 18px;
+ }
+ .share-btn{
+     background-color: #ff4dac;
+     color: white;
+     width: 150px;
+     border-radius: 10px;
+     font-size: 18px;
+     transition: background-color 0.3s;
+ }
+ 
+ .main-grid{
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));/* Tạo grid tự động thay đổi */
+     gap: 50px;
+     justify-content: center;/* Căn giữa theo chiều ngang */
+     margin-top: 50px;
+     margin-bottom: 50px;
+ }
+ .main-card{
+     background-color: white;
+     border-radius: 10px;
+     overflow: hidden;/* Không cho phần nội dung vượt ra khỏi khung */
+     text-align: center;
+     padding: 10px;
+     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);/* Tạo bóng cho khung */
+     transition: transform 0.3s ease-in-out;/* Hiệu ứng khi di chuột vào */
+     position: relative;/*Định vị relative để có thể thêm phần tử con như icon.*/
+     aspect-ratio: 2 / 3;/* Tỉ lệ khung */
+     max-width: 100%;
+     
+ }
+ .main-card:hover{
+     transform: scale(1.05);/* Phóng to khi di chuột vào */
+ }
+ .main-image{
+     width: 100%;
+     height: 70%;
+     object-fit: cover;/* Hiển thị ảnh không bị méo */
+     border-radius: 8px;
+ }
+ .main-info{
+     margin-top: 5px;
+     text-align: left;
+     color: rgb(0, 0, 0);
+ }
+ .main-info h3{
+     font-size: 15px;
+     font-weight: bold;
+     margin-bottom: 5px;
+ }
+ .main-info p{
+     font-size: 20px;
+     color: #FF1493;
+     background-color: rgb(248, 231, 239);
+     width: fit-content;
+     padding: 5px 10px;
+     border-radius: 10px;
+     text-align: center;
+ }
+ .main-icon{
+     position: absolute;/* Định vị tuyệt đối */
+     top: 400px;
+     right: 20px;
+     width: 70px;
+     height: 70px;
+     border-radius: 50%; 
+ }
+ 
+ 
+ /* Footer */
+ .footer{
+     display: flex;/* Sử dụng flexbox để căn chỉnh nội dung */
+     align-items: column;/* Hiển thị nội dung theo chiều dọc */
+     background-color: rgb(14, 13, 43);
+     padding: 50px 30px;
+     color: rgb(255, 255, 255);
+ }
+ .footer-content{
+     display: flex;
+     width: 100%;
+     flex-wrap: wrap;/* Cho phép các phần tử con xuống dòng */
+ }
+ .footer-section.about {
+     flex: 2; /* Phần About Us chiếm nhiều không gian hơn */
+     min-width: 50%; /* Chiếm ít nhất 50% chiều rộng */
+ }
+ .footer-section{
+     flex: 1;/* Phần tử con sẽ mở rộng ra toàn bộ không gian còn lại */
+     min-width: 200px;
+     margin: 10px;
+ }
+ .footer-section h3{
+     font-size: 24px;
+     margin-bottom: 10px;
+ }
+ .footer-section h3{
+     font-size: 24px;
+     margin-bottom: 10px;
+ }
+ .footer-section ul{
+     list-style: none;
+     padding: 0;
+ }
+ .footer-section ul li{
+     margin-bottom: 10px;
+     cursor: pointer;/* Khi rê chuột vào sẽ hiển thị kiểu nhấp chuột */
+ }
+ .footer-section ul li:hover{
+     text-decoration: underline; /* Gạch chân khi di chuột vào */
+ }
+ .sub{
+     display: flex;
+     gap: 10px;
+     margin-top: 20px;
+ }
+ .sub input{
+     padding: 10px;
+     border: none;
+     border-radius: 5px;
+     width: 400px;
+ }
+ .sub button{
+     padding: 10px 20px;
+     border: none;
+     border-radius: 5px;
+     background-color: #ff4dac;
+     color: white;
+     cursor: pointer;
+ }
+ .sub button:hover{
+     background-color: #ff4d6d;
+ }
+ .footer-logo{
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+ 
