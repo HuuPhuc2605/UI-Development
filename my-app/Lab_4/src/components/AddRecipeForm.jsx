@@ -6,7 +6,7 @@ export const AddRecipeForm = ({ recipes }) => {  // ✅ Nhận recipes từ prop
     return (
         
         <div className="recipe-grid">
-    {recipes.map((recipe) => (
+        {recipes.map((recipe) => (
         <div key={recipe.id} className="recipe-card">
             {console.log("URL ảnh:", recipe.image)} {/* 🛑 Kiểm tra URL ảnh */}
             <img src={recipe.image} alt={recipe.content} className="recipe-image" />
