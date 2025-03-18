@@ -11,7 +11,7 @@ const Chefify = () => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-800 transform scale-50">
+    <div className="bg-white text-gray-800">
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-4 shadow-md bg-white">
         {/* justify-between: Căn các phần tử con theo chiều ngang (trái và phải)r 
