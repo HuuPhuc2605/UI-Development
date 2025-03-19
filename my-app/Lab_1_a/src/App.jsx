@@ -2,10 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import BaiTap_1 from './component/BaiTap_1'
-import BaiTap_2 from './component/BaiTap_2'
-import BaiTap_3 from './component/BaiTap_3'
-import BaiTap_4 from './component/BaiTap_4'
+import BaiTap_1 from './components/BaiTap_1'
+import BaiTap_2 from './components/BaiTap_2'
+import BaiTap_3 from './components/BaiTap_3'
+import BaiTap_4 from './components/BaiTap_4'
 
 
 function App() {
