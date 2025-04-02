@@ -39,22 +39,23 @@ const DataTable = () => {
   return (
 
     <table className="border-collapse border border-gray-300 w-full">
-      <thead>
+       
+      <thead className="bg-green-200 text-boil h-16">
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id} className="border p-2">
+              <th key={header.id} className="border-4 border-stone-900 p-2">
                 {flexRender(header.column.columnDef.header, header.getContext())}
               </th>
             ))}
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className="bg-blue-300">
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className="border p-2">
+              <td key={cell.id} className="border-4 border-stone-900 p-2">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
