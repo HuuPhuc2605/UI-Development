@@ -1,10 +1,15 @@
+import DataTable from "./components/DataTeble"
 import Grid from "./components/Grid"
 
 function App() {
 
 
   return (
-    <Grid/>
+    <div>
+ <Grid/>
+ <br/>
+    <DataTable/>
+    </div>
   )
 }
 

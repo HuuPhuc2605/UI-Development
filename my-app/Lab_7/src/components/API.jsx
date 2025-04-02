@@ -7,9 +7,9 @@ const Grid = () => {
         <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 4</div>
         <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 5</div>
         <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 6</div>
-        <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 5</div>
-        <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 6</div>
-
+        <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 1</div>
+        <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 2</div>
+       
       </div>
     );
   };
