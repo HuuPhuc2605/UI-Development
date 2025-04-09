@@ -1,16 +1,22 @@
-import DataTable from "./components/DataTeble"
-import Grid from "./components/Grid"
+import DataTable from "./components/DataTable";
+import Grid from "./components/Grid";
+import APIOverview from "./components/APIOverview";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootPage from "./components/RootPage";
+const router = createBrowserRouter([
+  {
+    path: "",
+    element: <RootPage />,
+    children: [
+      { path: "", element: <Grid /> },
+      { path: "/apioverview", element: <APIOverview /> },
+      { path: "/datatable", element: <DataTable /> },
+    ],
+  },
+]);
 
 function App() {
-
-
-  return (
-    <div>
- <Grid/>
- <br/>
-    <DataTable/>
-    </div>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

@@ -82,8 +82,6 @@ function UseEffectComponent() {
         Danh sách công việc
       </h1>
       <div className=" my-12 grid grid-cols-4 gap-2 w-8/12 mx-auto ">
-        {/*my (margin-y): Thiết lập margin trên và dưới.
-        mx (margin-x): Thiết lập margin trái và phải.*/}
         {data.map((post) => (
           <div
             className="flex flex-col justify-between  mb-4  text-2xl bg-slate-300 px-2 py-2 rounded-xl border-2 border-gray-500  shadow-xl shadow-stone-700 mb-4"
