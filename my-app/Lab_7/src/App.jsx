@@ -1,6 +1,7 @@
 import DataTable from "./components/DataTable";
 import Grid from "./components/Grid";
 import APIOverview from "./components/APIOverview";
+import Overview from "./components/Overview";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootPage from "./components/RootPage";
 const router = createBrowserRouter([
@@ -8,9 +9,10 @@ const router = createBrowserRouter([
     path: "",
     element: <RootPage />,
     children: [
-      { path: "", element: <Grid /> },
+      { path: "", element: <DataTable /> },
       { path: "/apioverview", element: <APIOverview /> },
-      { path: "/datatable", element: <DataTable /> },
+      { path: "/grid", element: <Grid /> },
+      { path: "/analytics", element: <Overview /> },
     ],
   },
 ]);

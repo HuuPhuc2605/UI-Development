@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
+  Bell,
+  Search,
+  HelpCircle,
+  LayoutDashboard,
+  FileText,
+} from "lucide-react";
+import {
   useReactTable,
   getCoreRowModel,
   flexRender,
@@ -24,14 +31,49 @@ const DataTable = () => {
       .catch((error) => console.error("Lỗi khi gọi API:", error));
   };
 
+  const handleSubmit = (formData) => {
+    const api = "https://67ca6b86102d684575c5483b.mockapi.io/Review";
+    const isUpdate = !!modalData;
+    const request = isUpdate
+      ? axios.put(`${api}/${modalData.id}`, formData)
+      : axios.post(api, formData);
+
+    request
+      .then(() => {
+        fetchData();
+        setIsModalOpen(false);
+        setModalData(null);
+        alert(isUpdate ? "Cập nhật thành công!" : "Thêm mới thành công!");
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gửi dữ liệu:", error);
+        alert("Đã xảy ra lỗi, vui lòng thử lại.");
+      });
+  };
+
   const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Bạn có chắc chắn muốn xoá mục này?");
+    if (!confirmDelete) return;
+
     axios
       .delete(`https://67ca6b86102d684575c5483b.mockapi.io/Review/${id}`)
-      .then(() => fetchData())
-      .catch((error) => console.error("Lỗi khi xoá dữ liệu:", error));
+      .then(() => {
+        fetchData();
+      })
+      .catch((error) => {
+        console.error("Lỗi khi xoá dữ liệu:", error);
+        alert("Lỗi khi xoá, vui lòng thử lại.");
+      });
   };
 
   const handleBulkDelete = () => {
+    if (selectedIds.length === 0) return;
+
+    const confirmBulk = window.confirm(
+      "Bạn có chắc chắn muốn xoá các mục đã chọn?"
+    );
+    if (!confirmBulk) return;
+
     Promise.all(
       selectedIds.map((id) =>
         axios.delete(`https://67ca6b86102d684575c5483b.mockapi.io/Review/${id}`)
@@ -40,8 +82,12 @@ const DataTable = () => {
       .then(() => {
         setSelectedIds([]);
         fetchData();
+        alert("Đã xoá tất cả mục được chọn!");
       })
-      .catch((error) => console.error("Lỗi khi xoá hàng loạt:", error));
+      .catch((error) => {
+        console.error("Lỗi khi xoá hàng loạt:", error);
+        alert("Có lỗi xảy ra khi xoá hàng loạt.");
+      });
   };
 
   const toggleSelect = (id) => {
@@ -50,7 +96,10 @@ const DataTable = () => {
     );
   };
 
-  const totalTurnover = data.reduce((sum, item) => sum + Number(item.order || 0), 0);
+  const totalTurnover = data.reduce(
+    (sum, item) => sum + Number(item.order || 0),
+    0
+  );
   const totalProfit = (totalTurnover * 0.35).toFixed(0);
   const newCustomers = data.length;
 
@@ -105,11 +154,14 @@ const DataTable = () => {
         const status = getValue();
         let color = "bg-gray-200 text-gray-700";
         if (status === "New") color = "bg-blue-100 text-blue-600";
-        else if (status === "In progress") color = "bg-yellow-100 text-yellow-700";
+        else if (status === "In progress")
+          color = "bg-yellow-100 text-yellow-700";
         else if (status === "Completed") color = "bg-green-100 text-green-700";
 
         return (
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${color}`}>
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${color}`}
+          >
             {status}
           </span>
         );
@@ -146,59 +198,117 @@ const DataTable = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const handleSubmit = (formData) => {
-    const api = "https://67ca6b86102d684575c5483b.mockapi.io/Review";
-    const req = modalData
-      ? axios.put(`${api}/${modalData.id}`, formData)
-      : axios.post(api, formData);
-
-    req.then(() => {
-      setIsModalOpen(false);
-      setModalData(null);
-      fetchData();
-    });
-  };
-
   return (
     <div className="p-8 bg-white min-h-screen">
-      <div className="text-3xl font-bold text-pink-600 mb-6">Dashboard</div>
+      <div></div>
+      <header className="w-full flex justify-between items-center bg-white px-6 py-4 shadow-sm border-xl border-gray-500">
+        {/* Left side */}
+        <div className="text-2xl font-bold text-pink-500">Dashboard</div>
 
-      <div className="grid grid-cols-3 gap-6 mb-10">
+        {/* Right side */}
+        <div className="flex items-center space-x-4">
+          {/* Search bar */}
+          <div className="relative">
+            <span className="absolute left-3 top-2.5  text-gray-400">
+              <Search size={16} />
+            </span>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 w-64 py-2 bg-gray-100 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+            />
+          </div>
+
+          {/* Bell icon */}
+          <button className="text-gray-600 hover:text-pink-500">
+            <Bell size={20} />
+          </button>
+
+          {/* Help icon */}
+          <button className="text-gray-600 hover:text-pink-500">
+            <HelpCircle size={20} />
+          </button>
+
+          {/* Avatar */}
+          <img
+            src="https://i.pravatar.cc/40?img=3"
+            alt="Avatar"
+            className="w-9 h-9 rounded-full border-2 border-pink-300"
+          />
+        </div>
+      </header>
+      <div className="h-[1px] bg-gray-200 w-full" />
+      <div className="flex items-center space-x-2 mt-8">
+        <LayoutDashboard className="w-10 h-10 text-pink-500" />
+        <h1 className="text-2xl font-bold text-black-500">Overview</h1>
+      </div>
+
+      <div className=" mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="p-6 border rounded-xl shadow-sm border-pink-300 bg-pink-50">
           <div className="text-sm text-gray-500">Turnover</div>
-          <div className="text-3xl font-bold text-pink-700">${totalTurnover}</div>
-          <div className="text-green-600 text-sm mt-1">▲ 5.39% period of change</div>
+          <div className="text-3xl font-bold text-black-700">
+            ${totalTurnover}
+          </div>
+          <div className="text-green-600 text-sm mt-1">
+            ▲ 5.39% period of change
+          </div>
         </div>
         <div className="p-6 border rounded-xl shadow-sm border-blue-300 bg-blue-50">
           <div className="text-sm text-gray-500">Profit</div>
-          <div className="text-3xl font-bold text-blue-700">${totalProfit}</div>
-          <div className="text-green-600 text-sm mt-1">▲ 5.39% period of change</div>
+          <div className="text-3xl font-bold text-black-700">
+            ${totalProfit}
+          </div>
+          <div className="text-green-600 text-sm mt-1">
+            ▲ 5.39% period of change
+          </div>
         </div>
         <div className="p-6 border rounded-xl shadow-sm border-indigo-300 bg-indigo-50">
           <div className="text-sm text-gray-500">New customer</div>
-          <div className="text-3xl font-bold text-indigo-700">{newCustomers}</div>
-          <div className="text-green-600 text-sm mt-1">▲ 6.84% period of change</div>
+          <div className="text-3xl font-bold text-black-700">
+            {newCustomers}
+          </div>
+          <div className="text-green-600 text-sm mt-1">
+            ▲ 6.84% period of change
+          </div>
         </div>
       </div>
 
       <div className="flex justify-between items-center mb-4">
-        <div className="text-xl font-semibold">📋 Detailed report</div>
+        <div className="flex items-center space-x-2 mt-8">
+          <FileText className="w-10 h-10 text-pink-500" />
+          <h1 className="text-2xl font-bold text-black-500">Detailed report</h1>
+        </div>
         <div className="flex gap-2">
           <button
             onClick={() => {
               setModalData(null);
               setIsModalOpen(true);
             }}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+            className="flex items-center gap-2 px-4 py-2 text-pink-500 border border-pink-300 rounded-xl shadow-sm hover:bg-pink-50 bg-white transition duration-200"
           >
+            {/* Optional icon: Add icon trước chữ nếu muốn */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
             Add New
           </button>
           <button
             onClick={handleBulkDelete}
             disabled={selectedIds.length === 0}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50"
+            className="px-4 py-2 text-pink-500 border border-pink-300 rounded-xl shadow-sm hover:bg-pink-50 bg-white"
           >
-            Delete Selected
+            Import
           </button>
         </div>
       </div>
@@ -213,7 +323,10 @@ const DataTable = () => {
                     key={header.id}
                     className="text-left px-5 py-3 text-xs font-semibold text-gray-500 tracking-widest uppercase border-b"
                   >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                   </th>
                 ))}
               </tr>
@@ -223,7 +336,10 @@ const DataTable = () => {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-5 py-4 border-b text-sm text-gray-700">
+                  <td
+                    key={cell.id}
+                    className="px-5 py-4 border-b text-sm text-gray-700"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -232,7 +348,9 @@ const DataTable = () => {
           </tbody>
         </table>
       </div>
-      <div className="text-sm text-gray-400 text-right mt-4">{data.length} results</div>
+      <div className="text-sm text-gray-400 text-right mt-4">
+        {data.length} results
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
@@ -286,12 +404,14 @@ const DataTable = () => {
                 required
               />
               <input
+                type="date"
                 name="date"
                 defaultValue={modalData?.date || ""}
                 className="w-full border rounded px-4 py-2"
                 placeholder="Order Date"
                 required
               />
+
               <select
                 name="status"
                 defaultValue={modalData?.status || "New"}
