@@ -16,6 +16,9 @@ import { Pencil, Trash2 } from "lucide-react";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 6;
+
   const [selectedIds, setSelectedIds] = useState([]);
   const [modalData, setModalData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -101,6 +104,12 @@ const DataTable = () => {
     0
   );
   const totalProfit = (totalTurnover * 0.35).toFixed(0);
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const paginatedData = data.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   const newCustomers = data.length;
 
   const columns = [
@@ -193,7 +202,7 @@ const DataTable = () => {
   ];
 
   const table = useReactTable({
-    data,
+    data: paginatedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -313,41 +322,151 @@ const DataTable = () => {
         </div>
       </div>
 
+      {/* TABLE START */}
       <div className="overflow-x-auto rounded-2xl shadow border border-gray-200">
         <table className="min-w-full">
           <thead className="bg-gray-100">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="text-left px-5 py-3 text-xs font-semibold text-gray-500 tracking-widest uppercase border-b"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
+            <tr>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b"></th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                CUSTOMER NAME
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                COMPANY
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                ORDER VALUE
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                ORDER DATE
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                STATUS
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b">
+                ACTIONS
+              </th>
+            </tr>
           </thead>
           <tbody className="bg-white">
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-50">
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className="px-5 py-4 border-b text-sm text-gray-700"
+            {paginatedData.map((item) => (
+              <tr key={item.id} className="hover:bg-gray-50">
+                <td className="px-5 py-4 border-b">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox"
+                    checked={selectedIds.includes(item.id)}
+                    onChange={() => toggleSelect(item.id)}
+                  />
+                </td>
+                <td className="px-5 py-4 border-b">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={item.avatar}
+                      alt="avatar"
+                      className="w-10 h-10 rounded-full border border-gray-300"
+                    />
+                    <span className="font-semibold text-gray-900">
+                      {item.name}
+                    </span>
+                  </div>
+                </td>
+                <td className="px-5 py-4 border-b">{item.company}</td>
+                <td className="px-5 py-4 border-b font-medium text-gray-800">
+                  ${item.order}
+                </td>
+                <td className="px-5 py-4 border-b">{item.date}</td>
+                <td className="px-5 py-4 border-b">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${
+                      item.status === "New"
+                        ? "bg-blue-100 text-blue-600"
+                        : item.status === "In progress"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-green-100 text-green-700"
+                    }`}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+                    {item.status}
+                  </span>
+                </td>
+                <td className="px-5 py-4 border-b">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setModalData(item);
+                        setIsModalOpen(true);
+                      }}
+                      className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+                    >
+                      <Pencil size={16} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="p-2 rounded-full bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-800 transition-colors"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* PAGINATION */}
+      <div className="mt-6 flex items-center justify-between text-sm text-gray-700">
+        <div>{data.length} results</div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            className="px-2 py-1 rounded hover:bg-gray-100"
+            disabled={currentPage === 1}
+          >
+            &lt;
+          </button>
+
+          {Array.from({ length: totalPages }).map((_, i) => {
+            const page = i + 1;
+            const isActive = page === currentPage;
+            if (
+              page === 1 ||
+              page === totalPages ||
+              (page >= currentPage - 1 && page <= currentPage + 1)
+            ) {
+              return (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-1 rounded-full ${
+                    isActive
+                      ? "bg-pink-500 text-white"
+                      : "hover:bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            }
+            if (
+              (page === currentPage - 2 && page > 1) ||
+              (page === currentPage + 2 && page < totalPages)
+            ) {
+              return <span key={page}>...</span>;
+            }
+            return null;
+          })}
+
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            className="px-2 py-1 rounded hover:bg-gray-100"
+            disabled={currentPage === totalPages}
+          >
+            &gt;
+          </button>
+        </div>
+      </div>
+
       <div className="text-sm text-gray-400 text-right mt-4">
         {data.length} results
       </div>
