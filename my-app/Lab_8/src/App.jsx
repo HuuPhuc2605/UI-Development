@@ -1,10 +1,10 @@
 import React from "react";
-import Chefity from "./components/Chefity";
+import Body from "./components/Body";
 
 function App() {
   return (
     <div>
-      <Chefity />
+      <Body />
     </div>
   );
 }

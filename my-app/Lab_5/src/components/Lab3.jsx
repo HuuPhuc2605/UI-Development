@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { FiBookmark } from "react-icons/fi";
 const Lab3 = () => {
   const [recipes, setRecipes] = useState([]);
 
@@ -153,24 +153,9 @@ const Lab3 = () => {
                   />
                   <div className="p-4">
                     <h3 className="font-semibold mb-2">{recipe.content}</h3>
+                    <FiBookmark className="p-1 ml-56 mb-4 w-8 h-8 rounded-full border-2 border-pink-500 text-pink-500 text-xl cursor-pointer hover:bg-pink-300" />
                     <div className="flex justify-between items-center text-sm text-pink-600">
                       <span>{recipe.minutes} minutes</span>
-                      <button>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-5 h-5 text-pink-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 5v14l7-5 7 5V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"
-                          />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 </div>

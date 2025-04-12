@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { FiBookmark } from "react-icons/fi";
 const Chefify = () => {
   const [recipes, setRecipes] = useState([]);
 
@@ -115,11 +115,14 @@ const Chefify = () => {
                 {/*object-cover: Hiển thị hình ảnh mà không bị vùi bởi phần tử cha.*/}
                 <div className="p-4">
                   {/*p-4 → Thêm padding 4 (tương đương 16px).*/}
-                  <h3 className="font-bold">{recipe.content}</h3>
+                  <h3 className="font-bold">{recipe.content} </h3>
 
-                  <p className="text-pink-600 bg-pink-100 w-20 rounded-md ">
-                    {recipe.minutes} minutes
-                  </p>
+                  <div className="flex items-center gap-2 mt-2 ml-[5px]">
+                    <p className="text-pink-600 bg-pink-100 px-2 py-1 rounded-md">
+                      {recipe.minutes} minutes
+                    </p>
+                    <FiBookmark className="p-1 ml-20 mb-4 w-8 h-8 rounded-full border-2 border-pink-500 text-pink-500 text-xl cursor-pointer hover:bg-pink-300" />
+                  </div>
                 </div>
               </div>
             ))
