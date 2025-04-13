@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./header";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FiBookmark } from "react-icons/fi";
+import Footer from "./Footer";
 const Chefify = () => {
   const [recipes, setRecipes] = useState([]);
   const [videoRecipes, setVideoRecipes] = useState([]);
@@ -26,7 +27,8 @@ const Chefify = () => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-800 scale-50">
+    <div className="bg-white text-gray-800 ">
+      {/*scale-[20%]: thu phóng to nhỏ*/}
       <Header />
 
       <main className=" mt-[84px]">
@@ -136,8 +138,7 @@ const Chefify = () => {
           ))}
         </div>
       </main>
-
-      <footer className="bg-gray-900 text-white py-8 mt-12"></footer>
+      <Footer />
     </div>
   );
 };

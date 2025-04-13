@@ -1,3 +1,4 @@
+import { FiSearch } from "react-icons/fi";
 const Header = () => {
   return (
     <header className="flex flex-row justify-between mt-4 border-b-2 border-gray-100 pb-4">
@@ -8,11 +9,14 @@ const Header = () => {
         src="https://res.cloudinary.com/dkzpfo8b2/image/upload/v1744441317/Chefity_ya5rkt.png"
         alt="Logo"
       />
-      <input
-        type="text"
-        placeholder="What would you like to cook?"
-        className="border h-10 rounded-md px-4 py-2 w-96 gap-8 mt-4"
-      />
+      <div className="flex items-center bg-gray-200 rounded-lg px-4 py-2 w-96 h-10 mt-4 outline-none">
+        <FiSearch className="text-gray-500 text-xl mr-2 bg-gray-200 " />
+        <input
+          type="text"
+          placeholder="What would you like to cook?"
+          className="flex-1 outline-none bg-gray-200 "
+        />
+      </div>
       <div className="flex gap-8 mt-6 text-gray-500 ">
         <p className="hover:text-pink-500">What to cook</p>
         <p className="hover:text-pink-500">Recipes</p>
